@@ -1,0 +1,25 @@
+/*home*/
+.centered-content {
+    display: flex;
+    flex-direction:column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh; /* Adjust this value as needed */
+  }
+  
+
+/* home */
+.btnstyle{
+    color:white;
+    background-color:darkcyan;
+    font-size:200px;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    border-radius:30px;
+    width:250px;
+    height:250px;
+    box-shadow:2px 2px 5px #000000; 
+    box-sizing:2px; 
+    
+}

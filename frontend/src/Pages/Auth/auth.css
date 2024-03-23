@@ -1,0 +1,35 @@
+.login{
+    direction:center;
+    justify-content: center;
+    align-items: center;
+    height: 90px;;
+    width: 800px;
+    
+    
+}
+.whole{
+    direction:center ;
+    justify-content: center;
+    align-items: center;
+    background-color:rgba(0, 139, 139, 0.591);
+    border-radius: 30px;
+    height: 500px;
+    width: 1020px;
+    padding: 90px;
+    
+}
+.reg{
+    direction:center ;
+    justify-content: center;
+    align-items: center;
+    background-color:rgba(0, 139, 139, 0.591);
+    border-radius: 30px;
+    height: 600px;
+    width: 1020px;
+    padding: 90px;
+
+}
+.button-container {
+    display: flex;
+    gap: 10px;
+  }

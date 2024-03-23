@@ -1,0 +1,5 @@
+.custom-dropdown .btn-secondary {
+    background-color: white !important; /* Ensure white background */
+    color: black !important; /* Ensure black text */
+    border: 1px solid black !important; /* Ensure black border */
+  }

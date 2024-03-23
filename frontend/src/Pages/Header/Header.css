@@ -1,0 +1,19 @@
+.header {
+    background-color: #333;
+    color: white;
+    padding: 10px 0;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+  }
+
+  .header .logo {
+    font-size: 24px;
+    font-weight: bold;
+    margin-left: 20px;
+  }
+
+  .header .department {
+    font-size: 14px;
+    margin-top: 5px;
+  }

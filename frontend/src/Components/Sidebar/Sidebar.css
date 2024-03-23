@@ -1,0 +1,10 @@
+.sidebar-container {
+    display: flex;
+  }
+  
+  /* Styles for smaller screens (e.g., mobile and tablet) */
+  @media (max-width: 768px) {
+    .sidebar-container {
+      flex-direction: column;
+    }
+  }
