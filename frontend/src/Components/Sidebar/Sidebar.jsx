@@ -24,6 +24,14 @@ import {
   FeaturedPlayList,
   Category,
   PersonAdd,
+  Home,
+  Analytics,
+  AutoStories,
+  CoPresent,
+  Diversity3,
+  Camera,
+  Logout,
+  GroupWork
 } from "@mui/icons-material";
 import './Sidebar.css';
 
@@ -151,14 +159,15 @@ export default function Sidebar({ children }) {
 
           <List sx={{ margin: "0", padding: "0" }}>
             {[
-              { text: "Home", route: "/home", icon: AccountCircle },
-              { text: "About US", route: "/about", icon: Dashboard },
-              { text: "Semester", route: "/semester", icon: AddCircle },
-              { text: "Our Staff", route: "/staff", icon: FeaturedPlayList },
-              { text: "Students", route: "/students", icon: FeaturedPlayList },
+              { text: "Home", route: "/home", icon: Home },
+              { text: "About US", route: "/about", icon:Analytics },
+              { text: "Semester", route: "/semester", icon:AutoStories },
+              { text: "Our Staff", route: "/staff", icon: CoPresent },
+              { text: "Students", route: "/students", icon: Diversity3 },
               { text: "Departmentclub", route: "/club", icon: Category },
-              { text: "Practical Lab", route: "/practicallab", icon: PersonAdd },
-              { text: "Gallery", route: "/gallery", icon: PersonAdd },
+              { text: "Practical Lab", route: "/practicallab", icon:GroupWork },
+              { text: "Gallery", route: "/gallery", icon: Camera },
+              { text: "Logout", route: "/", icon:Logout },
               // { text: "Logout", route: "/", icon: PersonAdd },
             ].map(({ text, route, icon: Icon, dropdown }, index) => (
               <ListItem
@@ -167,7 +176,7 @@ export default function Sidebar({ children }) {
                 sx={{
                   display: "block",
                   color: "#fff",
-                  height: "76px",
+                  height: "73px",
                   backgroundColor: "#00838d",
                 }}
               >

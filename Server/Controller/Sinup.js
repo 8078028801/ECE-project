@@ -14,6 +14,7 @@ const sinup=async(req,res)=>{
     const hashedpassword=await bcrypt.hash(Password,salt)
     const customerdetails=await admin.create({Name,Registernumber,Mobilenumber,Email,Password: hashedpassword})
     res.json({
+        message: "User created successfully",
         Id:customerdetails._id,
        Name:customerdetails.Name,
        Registernumber:customerdetails.Registernumber,

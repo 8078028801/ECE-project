@@ -3,6 +3,7 @@ import { Col, Row } from 'react-bootstrap';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios'
+import { useNavigate } from 'react-router-dom';
 export default function Register() {
     const [login, setLogin] = useState({
         Name: '',
@@ -20,13 +21,15 @@ export default function Register() {
         }));
         console.log(login);
       };
+      const navigate=useNavigate()
      
     const confirmlogin=(e)=>{
       e.preventDefault()
-      axios.post("http://localhost:3000/sinup",login).then(res=>{
+      axios.post("http://localhost:5000/sinup",login).then(res=>{
        console.log(res); 
-       if(res.data.message==="success"){
+       if(res.data.message==="User created successfully"){
         console.log(login,"hii");
+        navigate("/login")
        }
       })
       

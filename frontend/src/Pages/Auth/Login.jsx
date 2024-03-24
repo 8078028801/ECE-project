@@ -22,11 +22,11 @@ export default function Login() {
       };
     const confirmlogin=(e)=>{
       e.preventDefault()
-      axios.post("http://localhost:3000/login",login).then(res=>{
+      axios.post("http://localhost:5000/login",login).then(res=>{
        console.log(res); 
        if(res.data.message==="success"){
         console.log(login,"hii");
-        navigate("/about")
+        navigate("/home")
        }
       })
       
