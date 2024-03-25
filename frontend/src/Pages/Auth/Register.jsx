@@ -4,6 +4,8 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import axios from 'axios'
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function Register() {
     const [login, setLogin] = useState({
         Name: '',
@@ -28,8 +30,16 @@ export default function Register() {
       axios.post("http://localhost:5000/sinup",login).then(res=>{
        console.log(res); 
        if(res.data.message==="User created successfully"){
+        toast.success(res.data.message)
         console.log(login,"hii");
-        navigate("/login")
+      
+        setTimeout(function () {
+          navigate("/login");
+        }, 3000); // (3 seconds)
+       
+       }
+       else{
+        toast.error("Email already exist")
        }
       })
       
@@ -37,6 +47,20 @@ export default function Register() {
    
   return (
     <>
+     <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+
+/>
+<ToastContainer />
     <Row>
         <Col>
         <center>

@@ -4,6 +4,8 @@ import Form from 'react-bootstrap/Form';
 import './auth.css'
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function Login() {
     const [login, setLogin] = useState({
         Email: '',
@@ -25,8 +27,16 @@ export default function Login() {
       axios.post("http://localhost:5000/login",login).then(res=>{
        console.log(res); 
        if(res.data.message==="success"){
+        toast.success(" Login successfully")
         console.log(login,"hii");
-        navigate("/home")
+        // navigate("/home")
+        setTimeout(function () {
+          navigate("/home");
+        }, 3000); // (3 seconds)
+       
+       }
+       else{
+        toast.error("Invalid ")
        }
       })
       
@@ -36,6 +46,20 @@ export default function Login() {
       }
   return (
     <>
+    <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+
+/>
+<ToastContainer />
     <Row>
 <Col>
 <center>

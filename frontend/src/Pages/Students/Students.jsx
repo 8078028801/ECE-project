@@ -11,6 +11,8 @@ import axios from 'axios'
 import { Button, Form, FormControl, FormGroup } from 'react-bootstrap';
 import Header from '../Header/Header';
 import './Students.css'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 export default function Students() {
   const [students, setStudents] = useState([]);
   const [open, setOpen] = React.useState(false);
@@ -75,8 +77,10 @@ Registernumber: "",
           console.log(response.data);
           const value = year.filter(data => data._id !== id);
           setYear(value)
+          toast.success("Deleted")
       } catch (error) {
           console.error('Error deleting student:', error);
+          toast.error("Error")
       }
       console.log(id);
   };
@@ -99,13 +103,29 @@ Registernumber: "",
       
       setState("")
       setSelectedOption("")
+      toast.success("Student added successfully")
     } catch (error) {
       console.error("Error submitting form:", error);
+      toast.error("error")
     }
   };
   
   return (
     <>
+     <ToastContainer
+position="top-right"
+autoClose={5000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+
+/>
+<ToastContainer />
    <Sidebar>
 <Header/>
 <div className='mt-5'>
