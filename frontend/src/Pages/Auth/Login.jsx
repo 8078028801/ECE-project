@@ -6,7 +6,12 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {Visibility} from '@mui/icons-material/';
+import {VisibilityOff} from '@mui/icons-material/';
+
+
 export default function Login() {
+  const [showPassword, setShowPassword] =useState(false); 
     const [login, setLogin] = useState({
         Email: '',
         Password: ''
@@ -72,8 +77,15 @@ theme="light"
       </Form.Group>
 
       <Form.Group className="login"style={{ textAlign: "left" }} controlId="formBasicPassword">
-        <Form.Label><b>Password</b></Form.Label>
-        <Form.Control type="password" placeholder="Password"name='Password'value={login.Password}onChange={handleLoginform} />
+        {/* <Form.Label><b>Password</b></Form.Label>
+        <Form.Control type="password" placeholder="Password"name='Password'value={login.Password}onChange={handleLoginform} /> */}
+      <Form.Label><b>Password</b></Form.Label>
+        <div style={{ position: 'relative' }}>
+          <Form.Control type={showPassword ? "text" : "password"} placeholder="Password" name='Password' value={login.Password} onChange={handleLoginform} />
+          <span style={{ position: 'absolute', right: '10px', top: '10px', cursor: 'pointer' }} onClick={() => setShowPassword(!showPassword)}>
+            {showPassword ? <Visibility /> : <VisibilityOff />}
+          </span>
+        </div>
       </Form.Group>
 
      

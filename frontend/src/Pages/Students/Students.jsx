@@ -16,14 +16,26 @@ import 'react-toastify/dist/ReactToastify.css';
 export default function Students() {
   const [students, setStudents] = useState([]);
   const [open, setOpen] = React.useState(false);
+  const [open1, setOpen1] = React.useState(false);
   const [state,setState]=useState({
- Mobilenumber:"", 
+Mobilenumber:"", 
 Name:"",
 Registernumber: "",
+CGPA:"",
 
+ })
+ const [editData,setEditData]=useState({
+  Mobilenumber:state.Mobilenumber, 
+  Name:state.Name,
+  Registernumber:state.Registernumber,
+  CGPA:state.CGPA,
  })
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const handlOpen1=()=>setOpen1(true);
+  const handleClose1 = () => setOpen1(false)
+
   const [selectedOption, setSelectedOption] = useState(''); // const handleDropdownChange = (option) => setSelectedOption(option);
   const handleDropdownChange = (option) => {
     console.log(option);
@@ -67,6 +79,8 @@ Registernumber: "",
     const filteredStudents = students.filter(student => student.Year === semester);
         console.log(filteredStudents);
     setYear(filteredStudents);
+    // const sortedStudents = filteredStudents?.slice().sort((a, b) => a?.Registernumber - b?.Registernumber);
+    // setYear(sortedStudents);
 
     };
     console.log(year);
@@ -92,6 +106,14 @@ Registernumber: "",
     }));
     console.log(state);
   };
+const [editid,setEditid]=useState()
+const editstudent=(id)=>{
+  setEditid(id)
+console.log(id);
+console.log(state);
+}
+
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log("Form submitted");
@@ -109,6 +131,30 @@ Registernumber: "",
       toast.error("error")
     }
   };
+  
+  const handleeditSubmit = async (event) => {
+    event.preventDefault(); // Prevent the default form submission behavior
+    
+    console.log(editid);
+    console.log(state);
+    
+    console.log("Form submitted");
+    axios.put(`http://localhost:5000/updatestudents/${editid}`, state).then(res=>{
+      console.log(res.data);
+    })
+  
+    // try {
+    //   const response = await axios.put(`http://localhost:5000/updatestudents/${id}`, state);
+    //   console.log(response.data);
+      
+    //   setState("")
+    //   setSelectedOption("")
+    //   toast.success("Student edited successfully")
+    // } catch (error) {
+    //   console.error("Error submitting form:", error);
+    //   toast.error("error")
+    // }
+  }
   
   return (
     <>
@@ -153,6 +199,7 @@ theme="light"
             <th>REGISTER NUMBER</th>
             <th>NAME</th>
             <th>MOBILE NUMBER</th>
+            <th>CGPA</th>
             <th>EDIT</th>
             <th>DELETE</th>
           </tr>
@@ -164,7 +211,15 @@ theme="light"
  <td>{data?.Registernumber}</td>
  <td>{data?.Name}</td>
  <td>{data?.Mobilenumber}</td>
- <td><Edit/></td>
+ <td>{data?.CGPA}</td>
+ <td><Edit onClick={()=>{editstudent(data._id);handlOpen1(); setState({
+      Name:data.Name,
+      Registernumber: data.Registernumber,
+      Mobilenumber: data.Mobilenumber,
+      CGPA: data.CGPA,
+      Year: data.Year // Assuming data.year represents the year
+      
+    });setSelectedOption(data.Year)}}/></td>
  <td><Delete onClick={()=>{deletestudent(data._id)}}/></td>
  
    </tr>
@@ -211,6 +266,11 @@ theme="light"
       </FormGroup>
 
       <FormGroup className='mt-2'>
+        <Form.Label><b>CGPA</b></Form.Label>
+        <FormControl type="number"name='CGPA'value={state.CGPA}onChange={handlechange}/>
+      </FormGroup>
+
+      <FormGroup className='mt-2'>
         <Form.Label><b>Year</b></Form.Label>
         <DropdownButton
           title={selectedOption || 'Select Option'}
@@ -230,6 +290,65 @@ theme="light"
         </Box>
       </Modal>
     </div>
+
+
+    <Modal
+        open={open1}
+        onClose={handleClose1}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+         
+        <Box sx={style}>
+        <Button onClick={handleClose1} variant='white' style={{position:"absolute",top:"0",right:"0"}}>
+          <Close />
+        </Button>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+        <h3> Edit Students </h3>  
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+          <Form 
+          onSubmit={handleeditSubmit}
+          >
+      <FormGroup className='mt-2'>
+        <Form.Label><b>NAME</b></Form.Label>
+        <FormControl type="text" name='Name'value={state.Name}onChange={handlechange}/>
+      </FormGroup>
+
+      <FormGroup className='mt-2'>
+        <Form.Label><b>REGISTER NUMBER</b></Form.Label>
+        <FormControl type="text" name='Registernumber'value={state.Registernumber}onChange={handlechange} />
+      </FormGroup>
+
+      <FormGroup className='mt-2'>
+        <Form.Label><b>MOBILE NUMBER</b></Form.Label>
+        <FormControl type="number"name='Mobilenumber'value={state.Mobilenumber}onChange={handlechange}/>
+      </FormGroup>
+
+      <FormGroup className='mt-2'>
+        <Form.Label><b>CGPA</b></Form.Label>
+        <FormControl type="number"name='CGPA'value={state.CGPA}onChange={handlechange}/>
+      </FormGroup>
+
+      <FormGroup className='mt-2'>
+        <Form.Label><b>Year</b></Form.Label>
+        <DropdownButton
+          title={selectedOption || 'Select Option'}
+          variant="light"
+        >
+          <Dropdown.Item onClick={() => handleDropdownChange('Firstyear')}>First year</Dropdown.Item>
+          <Dropdown.Item onClick={() => handleDropdownChange('Secondyear')}>Second year</Dropdown.Item>
+          <Dropdown.Item onClick={() => handleDropdownChange('Thirdyear')}>Third year</Dropdown.Item>
+        </DropdownButton>
+      </FormGroup>
+
+      <Button variant="primary" type="submit"className='mt-4'>
+        Submit
+      </Button>
+    </Form>
+          </Typography>
+        </Box>
+      </Modal>
    </Sidebar>
     
     </>

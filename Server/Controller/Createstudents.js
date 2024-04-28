@@ -7,11 +7,11 @@ const student = require("./Studentsschema");
 const Createstudents=async(req,res)=>{
     const {Name,
         Registernumber,
-        Year,Mobilenumber}=req.body;
+        Year,Mobilenumber,CGPA}=req.body;
     const Userdetails=await student.create({
         Name,
         Registernumber,
-        Year,Mobilenumber
+        Year,Mobilenumber,CGPA
     })
     res.json(Userdetails)
 }
